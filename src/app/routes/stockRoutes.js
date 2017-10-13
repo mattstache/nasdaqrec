@@ -5,7 +5,7 @@ var stockHandler = require('../controllers/stock.controller.js');
 var express = require('express');
 
 var router = express.Router();
-const Stock = require('../model/Stock.model')
+//const Stock = require('../model/Stock.model')
 
 router.get('/', function(req, res){
 	res.send('API initialized')

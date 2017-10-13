@@ -9,9 +9,11 @@ var bodyParser = require('body-parser');
 var app = express();
 var router = express.Router();
 
-var port = process.env.API_PORT || 3001;
+const config = require('./src/app/model/config');
 
-const db = 'mongodb://localhost/nasdaqrec';
+var port = config.port;//process.env.API_PORT || 3001;
+
+const db = 'mongodb://localhost:5000';//'mongodb://localhost/nasdaqrec';
 mongoose.Promise = global.Promise;
 
 // Using `mongoose.connect`...
@@ -32,6 +34,7 @@ promise.then(function(db) {
 
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
+
 	//To prevent errors from Cross Origin Resource Sharing, we will set 
 	//our headers to allow CORS with middleware like so:
 	app.use(function(req, res, next) {
@@ -60,16 +63,27 @@ promise.then(function(db) {
 
 	app.use(express.static(__dirname + "/dist"));
 
-	app.get('/:symbol', function(req, res){
-		res.send('symbol sent')
-	});
+	//dev error handler
+	if (dev){
+		app.use(function(err, req, res, next){
+			console.log(err);
+			res.status(err.status || 500).send();
+		})
+	}
+
+	// production error handler
+	app.use(function(err, req, res, next){
+		res.status(err.status || 500).send();
+	})
 
 	//now we can set the route path & initialize the API
 	//Define our routes
 	var stockRoutes = require('./src/app/routes/stockRoutes');
+	var userRoutes = require('./src/app/routes/stockRoutes');
 
 	//Use our router configuration when we call /api
 	app.use('/api/stock', stockRoutes);
+	app.use('/api/users', userRoutes);
 
 	//starts the server and listens for requests
 	app.listen(port, function() {
