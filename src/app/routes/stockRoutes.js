@@ -11,6 +11,8 @@ router.get('/', function(req, res){
 	res.send('API initialized')
 });
 
+console.log('load stock routes')
+
 // //get all lists
 router.get('/all', stockHandler.show_all_stocks);
 

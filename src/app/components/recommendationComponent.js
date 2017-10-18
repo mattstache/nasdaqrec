@@ -1,4 +1,5 @@
 var React = require('react');
+const config = require('../model/config');
 require('es6-promise').polyfill();
 import RecommendationChart from './recommendationChartComponent.js';
 //require('isomorphic-fetch');
@@ -45,8 +46,8 @@ class RecommendationComponent extends React.Component{
 		let symbol = this.refs.symbol.value;
 
 		console.log('form')
-		console.log
-		fetch('http://localhost:3001/api/stock/add', {
+		console.log(config.apiUrl)
+		fetch(config.apiUrl + '/api/stock/add', {
 			method: 'POST',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
@@ -71,7 +72,7 @@ class RecommendationComponent extends React.Component{
 		console.log('onDeleteStock')
 		//console.log(this.props)
 		console.log(stock)
-		fetch('http://localhost:3001/api/stock/' + stock._id, {
+		fetch(config.apiUrl + '/api/stock/' + stock._id, {
 			method: 'DELETE',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
@@ -107,7 +108,7 @@ class RecommendationComponent extends React.Component{
 		console.log('get lists')
 		let symbols = [];
 
-		fetch('http://localhost:3001/api/stock/all')
+		fetch(config.apiUrl + '/api/stock/all')
 		.then((data) => {
 			return data.json().then(function(json) {
 				console.log('----GETSTOCKS----')

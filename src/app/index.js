@@ -10,8 +10,9 @@ require('./scss/index.scss');
 //require('./css/index.css');
 
 //Module requires
-import RecommendationComponent from './recommendationComponent';
-import SignInComponent from './signInComponent';
+import RecommendationComponent from './components/recommendationComponent';
+import SignInComponent from './components/signInComponent';
+import SignUpComponent from './components/signUpComponent';
 
 export default class App extends React.Component {
 	render(){
@@ -19,7 +20,8 @@ export default class App extends React.Component {
 			<Router history={newHistory}>
 				<div>
 					<Route exact path={'/'} component={RecommendationComponent}></Route>
-					<Route exact path={'/user/signin'} component={SignInComponent}></Route>
+					<Route exact path={'/signin'} component={SignInComponent}></Route>
+					<Route exact path={'/signup'} component={SignUpComponent}></Route>
 				</div>
 			</Router>
 		);
