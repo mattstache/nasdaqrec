@@ -10,7 +10,7 @@ module.exports.createUser = function(req, res){
 	console.log('request to create user');
 	var data = {
 		email: req.body.email,
-		hash: bcrypt.hashSync(req.body.password)
+		hash: req.body.password
 	};
 
 	var newUser = new User(data);

@@ -20,7 +20,8 @@ userSchema.pre('save', function(callback){
 
 // TODO method to check hashed pw
 userSchema.methods.checkPassword = function(pw, next){
-	console.log('checkPassword: ' + pw)
+	console.log('check1: ' + pw)
+	console.log('check2: ' + this.hash)
 	bcrypt.compare(pw, this.hash, function(err, isMatch){
 		if(err){
 			console.log('error')
@@ -29,6 +30,8 @@ userSchema.methods.checkPassword = function(pw, next){
 		}else{
 			console.log('no err')
 		}
+
+		console.log('ismathch: ' + isMatch)
 
 		next(null, isMatch);
 	});
