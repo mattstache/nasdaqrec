@@ -14,7 +14,7 @@ const config = require('./src/app/model/config');
 
 var port = config.port;//process.env.API_PORT || 3001;
 
-const db = 'mongodb://localhost:5000/nasdaqrec';//'mongodb://localhost/nasdaqrec';
+const db = config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
 mongoose.Promise = global.Promise;
 
 // Using `mongoose.connect`...
@@ -74,6 +74,8 @@ promise.then(function(db) {
 	if (dev){
 		app.use(logger('dev'));
 	}
+
+	require('./init/init');
 
 	// production error handler
 	app.use(function(err, req, res, next){
