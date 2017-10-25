@@ -1,5 +1,6 @@
 var React = require('react');
 require('es6-promise').polyfill();
+const config = require('../model/config');
 //require('isomorphic-fetch');
 
 
@@ -26,8 +27,26 @@ class SignUpComponent extends React.Component{
 
 	}
 
-	signUp() {
-		console.log('signin')
+	signUp(e) {
+		e.preventDefault();
+		console.log('signup');
+		console.log(this.refs.email.value + " : " + this.refs.password.value)
+		fetch(config.apiUrl + '/api/user', {
+			method: 'POST',
+			headers: new Headers({
+             'Content-Type': 'application/json', // <-- Specifying the Content-Type
+    		}),
+			body: JSON.stringify({
+				email: this.refs.email.value,
+				password: this.refs.password.value
+			})
+		})
+		.then((data) => {
+			return data.json().then(function(json) {
+				console.log('finished signup')
+				console.log(json)
+			});
+		});
 	}
 
 	//load data

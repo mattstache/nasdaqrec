@@ -10,9 +10,22 @@ require('./scss/index.scss');
 //require('./css/index.css');
 
 //Module requires
+import PortfolioComponent from './components/portfolioComponent';
 import RecommendationComponent from './components/recommendationComponent';
 import SignInComponent from './components/signInComponent';
 import SignUpComponent from './components/signUpComponent';
+
+const PrivateRoute = ({ component: Component }) => (
+  <Route render={props => (
+    true ? (   //true needs to check if authenticated
+      <Component />
+    ) : (
+      <SignInComponent/>
+    )
+  )}/>
+)
+
+// <PrivateRoute path="/portfolio" component={PortfolioComponent}/>
 
 export default class App extends React.Component {
 	render(){
@@ -20,8 +33,11 @@ export default class App extends React.Component {
 			<Router history={newHistory}>
 				<div>
 					<Route exact path={'/'} component={RecommendationComponent}></Route>
+					
 					<Route exact path={'/signin'} component={SignInComponent}></Route>
 					<Route exact path={'/signup'} component={SignUpComponent}></Route>
+
+					<PrivateRoute path="/portfolio" component={PortfolioComponent}/>
 				</div>
 			</Router>
 		);

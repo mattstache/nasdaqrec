@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const cors = require('cors');
 //var jsonwebtoken = require("jsonwebtoken");
 //and create our instances
 var app = express();
@@ -35,6 +36,8 @@ promise.then(function(db) {
 
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
+
+	app.use(cors());
 
 	//To prevent errors from Cross Origin Resource Sharing, we will set 
 	//our headers to allow CORS with middleware like so:
