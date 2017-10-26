@@ -45,12 +45,13 @@ export default class App extends React.Component {
 
 const isAuthenticated = () => {
 	console.log('CheckAuth');
+	console.log(document.cookie)
 	fetch('/api/auth/validate', {//config.apiUrl + 
 		method: 'GET',
 		headers: new Headers({
          'Content-Type': 'application/json', // <-- Specifying the Content-Type
 		}),
-		//credentials: 'include',
+		credentials: 'include',
 		//body: JSON.stringify({ localStorage.token})
 	})
 	.then((data) => {

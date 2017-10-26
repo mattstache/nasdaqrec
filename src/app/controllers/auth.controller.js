@@ -40,7 +40,7 @@ exports.loginUser = function(req, res, next){
 console.log('--cookie should be set here--')
 console.log(token)
                 res.status(200)
-	            .cookie('token', token, {httpOnly: true})
+	            .cookie('token', token, {httpOnly: false, maxAge: 999999999999})
 	            .send({message: 'cookie is set'});
 	            //.json({user: user})
 	            //.send('cookie is set');
@@ -61,7 +61,8 @@ function validateToken(req, res, next, c) {
     const { token } = req.cookies;
     console.log('-----validateToken-------')
     console.log('--req.cookies--')
-    console.log(req.cookies)
+    console.log("token :  ", req.cookies.token);
+
 
     if (!token){
     	console.log('This endpoint requires a token')
@@ -85,19 +86,23 @@ function validateToken(req, res, next, c) {
         	console.log('Expired token 1')
             return res.status(403).send('Expired token');
         }
-        if (decoded.isAdmin !== user.isAdmin){
-        	console.log('Expired token 2')
-            return res.status(403).send('Expired token');
-        }
+        // if (decoded.isAdmin !== user.isAdmin){
+        // 	console.log('Expired token 2')
+        //     return res.status(403).send('Expired token');
+        // }
 
-        if (!user.isAdmin && c.adminRequired){
-        	console.log('Admin privileges required')
-            return res.status(403).send('Admin privileges required');
-        }
+        // if (!user.isAdmin && c.adminRequired){
+        // 	console.log('Admin privileges required')
+        //     return res.status(403).send('Admin privileges required');
+        // }
 
-        req.isAuthenticated = true;
-        req.user = decoded;
-        req.token = token;
+        // req.isAuthenticated = true;
+        // req.user = decoded;
+        // req.token = token;
+
+        // res.isAuthenticated = true;
+        // res.user = user;
+        res.status(200).send({user: user, isAuthenticated:true});
         next();
     });
 }

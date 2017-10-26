@@ -37,7 +37,9 @@ class SignInComponent extends React.Component{
 		fetch('/api/auth/token', {//config.apiUrl + 
 			method: 'POST',
 			headers: new Headers({
-             'Content-Type': 'application/json', // <-- Specifying the Content-Type
+             	'Accept':  'application/json',
+       			'Content-Type': 'application/json',
+       			'Cache': 'no-cache'
     		}),
     		//credentials: 'same-origin',
     		credentials: 'include',
