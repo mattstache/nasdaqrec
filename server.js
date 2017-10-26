@@ -6,7 +6,16 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const cookieParser = require('cookie-parser')
+//const httpProxy = require('http-proxy');
 //var jsonwebtoken = require("jsonwebtoken");
+
+// We need to add a configuration to our proxy server,
+// as we are now proxying outside localhost
+// var proxy = httpProxy.createProxyServer({
+//   changeOrigin: true
+// });
+
 //and create our instances
 var app = express();
 var router = express.Router();
@@ -24,7 +33,7 @@ var promise = mongoose.connect(db, {
   /* other options */
 });
 
-
+app.use(cookieParser());
 
 
 promise.then(function(db) {
@@ -33,6 +42,13 @@ promise.then(function(db) {
 	if (app.get('env') === 'development') var dev = true;
 	// logger in dev mode (morgan)
 	//if (dev) app.use(logger('dev'));
+
+	// app.all('/api/*', function (req, res) {
+	//   proxy.web(req, res, {
+	//     target: config.apiUrl
+	//   });
+	// });
+
 
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
@@ -45,7 +61,7 @@ promise.then(function(db) {
 	 res.setHeader('Access-Control-Allow-Origin', '*');
 	 res.setHeader('Access-Control-Allow-Credentials', 'true');
 	 res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-	 res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+	 res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
 	//and remove cacheing so we get the most recent comments
 	 res.setHeader('Cache-Control', 'no-cache');
 	 next();

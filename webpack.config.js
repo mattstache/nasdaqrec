@@ -1,5 +1,6 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const config = require('./src/app/model/config');
 // var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
@@ -33,4 +34,14 @@ module.exports = {
 		    }
         ]
     },
+    devServer: {
+		proxy: {
+      		'/api': {
+        		target: config.apiUrl,
+        		changeOrigin: true,
+        		secure: false,
+        		headers: {'http-x-requested-with' : 'XMLHttpRequest' }
+        	}
+        }
+	}
 };

@@ -35,10 +35,21 @@ exports.loginUser = function(req, res, next){
             user.token = token;
             user.save((err) => {
                 if (err) return next(err);
-                res.json({user: user, token: token});
+                //res.json({user: user, token: token});
+                //res.cookie('token', token).send('set cookie');//.json({user: user, token: token});//.send('cookie set');
+console.log('--cookie should be set here--')
+console.log(token)
+                res.status(200)
+	            .cookie('token', token, {httpOnly: true, maxAge: 1209600000})
+	            .send({message: 'cookie is set'});
+	            //.json({user: user})
+	            //.send('cookie is set');
+	            //.send(/* ... */);
             });
         });
     });
+
+	//next();
 };
 
 exports.loginRequired = function(req, res, next){
@@ -46,26 +57,43 @@ exports.loginRequired = function(req, res, next){
 };
 
 function validateToken(req, res, next, c) {
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    //var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const { token } = req.cookies;
+    console.log('-----validateToken-------')
+    console.log('--req.cookies--')
+    console.log(req.cookies)
 
-    if (!token) return res.status(403).send('This endpoint requires a token');
+    if (!token){
+    	console.log('This endpoint requires a token')
+    	return res.json({isAuthenticated: false}).send('This endpoint requires a token');
+    }
 
     try {
         var decoded = jwt.decode(token, config.secret);
     } catch(err) {
+    	console.log('Failed to authenticate token')
         return res.status(403).send('Failed to authenticate token');
     }
 
     User.findById(decoded.id, function(err, user) {
         if (err) return next(err);
-        if (!user) return res.status(403).send('Invalid user');
-        if (token !== user.token)
+        if (!user){
+        	console.log('Invalid user')
+        	return res.status(403).send('Invalid user');
+        }
+        if (token !== user.token){
+        	console.log('Expired token 1')
             return res.status(403).send('Expired token');
-        if (decoded.isAdmin !== user.isAdmin)
+        }
+        if (decoded.isAdmin !== user.isAdmin){
+        	console.log('Expired token 2')
             return res.status(403).send('Expired token');
+        }
 
-        if (!user.isAdmin && c.adminRequired)
+        if (!user.isAdmin && c.adminRequired){
+        	console.log('Admin privileges required')
             return res.status(403).send('Admin privileges required');
+        }
 
 
         req.user = decoded;

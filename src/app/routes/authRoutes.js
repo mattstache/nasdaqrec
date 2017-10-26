@@ -8,5 +8,6 @@ var router = express.Router();
 
 
 router.post('/token', auth.loginUser);
+router.get('/validate', auth.loginRequired);
 
 module.exports = router;

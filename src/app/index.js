@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDom = require('react-dom');
 // const mongoose = require('mongoose');
+const config = require('./model/config');
 import {Router, Route, browserHistory, Link} from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory'
 const newHistory = createBrowserHistory();
@@ -17,15 +18,13 @@ import SignUpComponent from './components/signUpComponent';
 
 const PrivateRoute = ({ component: Component }) => (
   <Route render={props => (
-    true ? (   //true needs to check if authenticated
+    isAuthenticated() ? (   //true needs to check if authenticated //isAuthenticated() 
       <Component />
     ) : (
       <SignInComponent/>
     )
   )}/>
 )
-
-// <PrivateRoute path="/portfolio" component={PortfolioComponent}/>
 
 export default class App extends React.Component {
 	render(){
@@ -42,6 +41,25 @@ export default class App extends React.Component {
 			</Router>
 		);
 	}
+};
+
+const isAuthenticated = () => {
+	console.log('CheckAuth');
+	fetch(config.apiUrl + '/api/auth/validate', {
+		method: 'GET',
+		headers: new Headers({
+         'Content-Type': 'application/json', // <-- Specifying the Content-Type
+		}),
+		//credentials: 'include',
+		//body: JSON.stringify({ localStorage.token})
+	})
+	.then((data) => {
+		return data.json().then(function(json) {
+			console.log('response checkauth')
+			console.log(json)
+			return json.isAuthenticated;
+		});
+	});
 };
 
 

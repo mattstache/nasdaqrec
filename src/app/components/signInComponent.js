@@ -34,21 +34,27 @@ class SignInComponent extends React.Component{
 		console.log('signin')
 		var $self = this;
 		console.log({email: $self.refs.email.value, password: $self.refs.password.value})
-		fetch(config.apiUrl + '/api/auth/token', {
+		fetch('/api/auth/token', { //config.apiUrl + 
 			method: 'POST',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
     		}),
+    		//credentials: 'same-origin',
+    		credentials: 'include',
 			body: JSON.stringify({email: $self.refs.email.value, password: $self.refs.password.value})
 		})
 		.then((res) => {
 			if(!res.ok){ alert('An error occurred');}
 			else{
-				return res.json().then(function(result){
+				return res.json().then(function(resp){
 					console.log('signin')
-					console.log(result)
-					localStorage.token = result.token;
-					 $self.props.history.push("/");
+					console.log(resp)
+					console.log(resp.headers)
+					console.log('document.cookie')
+					console.log(document.cookie)
+					//localStorage.token = result.token;
+					 //window.location = '/portfolio';
+					 //$self.props.history.push("/");
 
 					//browserHistory.replace("/")
 				})
