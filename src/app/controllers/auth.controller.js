@@ -40,7 +40,7 @@ exports.loginUser = function(req, res, next){
 console.log('--cookie should be set here--')
 console.log(token)
                 res.status(200)
-	            .cookie('token', token, {httpOnly: true, maxAge: 1209600000})
+	            .cookie('token', token, {httpOnly: true})
 	            .send({message: 'cookie is set'});
 	            //.json({user: user})
 	            //.send('cookie is set');
@@ -95,7 +95,7 @@ function validateToken(req, res, next, c) {
             return res.status(403).send('Admin privileges required');
         }
 
-
+        req.isAuthenticated = true;
         req.user = decoded;
         req.token = token;
         next();

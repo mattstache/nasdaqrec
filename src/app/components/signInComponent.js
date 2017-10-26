@@ -34,7 +34,7 @@ class SignInComponent extends React.Component{
 		console.log('signin')
 		var $self = this;
 		console.log({email: $self.refs.email.value, password: $self.refs.password.value})
-		fetch('/api/auth/token', { //config.apiUrl + 
+		fetch('/api/auth/token', {//config.apiUrl + 
 			method: 'POST',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type

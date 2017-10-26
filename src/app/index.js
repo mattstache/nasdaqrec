@@ -45,7 +45,7 @@ export default class App extends React.Component {
 
 const isAuthenticated = () => {
 	console.log('CheckAuth');
-	fetch(config.apiUrl + '/api/auth/validate', {
+	fetch('/api/auth/validate', {//config.apiUrl + 
 		method: 'GET',
 		headers: new Headers({
          'Content-Type': 'application/json', // <-- Specifying the Content-Type

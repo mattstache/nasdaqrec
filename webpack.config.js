@@ -38,10 +38,13 @@ module.exports = {
 		proxy: {
       		'/api': {
         		target: config.apiUrl,
-        		changeOrigin: true,
+        		//changeOrigin: true,
         		secure: false,
-        		headers: {'http-x-requested-with' : 'XMLHttpRequest' }
+        		//headers: {'http-x-requested-with' : 'XMLHttpRequest' }
         	}
+  
+    //"**": {target: "http://localhost:3001"}
+  
         }
 	}
 };
