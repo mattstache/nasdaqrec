@@ -1,51 +1,58 @@
-var React = require('react');
-var ReactDom = require('react-dom');
-// const mongoose = require('mongoose');
-const config = require('./model/config');
-import {Router, Route, browserHistory, Link} from 'react-router';
+import React from 'react'
+import {
+  Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 const newHistory = createBrowserHistory();
 
-//Styles
-require('./scss/index.scss');
-//require('./css/index.css');
-
-//Module requires
 import PortfolioComponent from './components/portfolioComponent';
 import RecommendationComponent from './components/recommendationComponent';
 import SignInComponent from './components/signInComponent';
 import SignUpComponent from './components/signUpComponent';
 
-const PrivateRoute = ({ component: Component }) => (
-  <Route render={props => (
-    isAuthenticated() ? (   //true needs to check if authenticated //isAuthenticated() 
-      <Component />
-    ) : (
-      <SignInComponent/>
-    )
-  )}/>
-)
-
-export default class App extends React.Component {
-	render(){
-		return(
-			<Router history={newHistory}>
+const AuthTest = () => (
+	<Router history={newHistory}>
 				<div>
 					<Route exact path={'/'} component={RecommendationComponent}></Route>
 					
 					<Route exact path={'/signin'} component={SignInComponent}></Route>
 					<Route exact path={'/signup'} component={SignUpComponent}></Route>
 
+					
+
+					
+
+					
+
 					<PrivateRoute path="/portfolio" component={PortfolioComponent}/>
+
+					
+					
 				</div>
 			</Router>
-		);
-	}
-};
+)
 
-const isAuthenticated = () => {
-	console.log('CheckAuth');
-	console.log(document.cookie)
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    loggedIn() ? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/signin',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
+    const loggedIn = (nextState, replace) => {
+	console.log('loggedIn')
+
+	//console.log(document.cookie)
 	fetch('/api/auth/validate', {//config.apiUrl + 
 		method: 'GET',
 		headers: new Headers({
@@ -55,15 +62,25 @@ const isAuthenticated = () => {
 		//body: JSON.stringify({ localStorage.token})
 	})
 	.then((data) => {
-		return data.json().then(function(json) {
-			console.log('response checkauth')
-			console.log(json)
+		data.json().then(function(json) {
+			console.log('json.isAuthenticated: ' + json.isAuthenticated)
+
 			return json.isAuthenticated;
+			// if(json.isAuthenticated){
+			// 	// replace({
+			//  //      pathname: '/signin',
+			//  //      state: { nextPathname: nextState.location.pathname }
+			//  //    })	
+			//  	return PortfolioComponent;
+			// }else{
+			// 	return SignInComponent;
+			// }
+			
+			//return json.isAuthenticated;
 		});
 	});
+
+
 };
 
-
-//put component into html page
-ReactDom.render(<App />, document.getElementById('todo-wrapper'));
-
+export default AuthTest

@@ -102,6 +102,7 @@ function validateToken(req, res, next, c) {
 
         // res.isAuthenticated = true;
         // res.user = user;
+        console.log('user has been authenticated')
         res.status(200).send({user: user, isAuthenticated:true});
         next();
     });

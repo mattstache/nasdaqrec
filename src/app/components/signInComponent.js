@@ -33,6 +33,7 @@ class SignInComponent extends React.Component{
 		e.preventDefault();
 		console.log('signin')
 		var $self = this;
+		//const { history } = this.props;
 		console.log({email: $self.refs.email.value, password: $self.refs.password.value})
 		fetch('/api/auth/token', {//config.apiUrl + 
 			method: 'POST',
@@ -54,6 +55,7 @@ class SignInComponent extends React.Component{
 					console.log(resp.headers)
 					console.log('document.cookie')
 					console.log(document.cookie)
+					//history.push('/portfolio')
 					//localStorage.token = result.token;
 					 //window.location = '/portfolio';
 					 //$self.props.history.push("/");

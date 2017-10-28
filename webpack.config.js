@@ -12,7 +12,7 @@ module.exports = {
 		tls: 'empty',
 		module: 'empty'
 	},
-    entry: path.resolve(__dirname, 'src') + '/app/index.js',
+    entry: path.resolve(__dirname, 'src') + '/app/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist') + '/app',
         filename: 'bundle.js',
@@ -21,11 +21,11 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 include: path.resolve(__dirname, 'src'),
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['react', 'es2015', 'stage-2']
                 }
             },
             {
