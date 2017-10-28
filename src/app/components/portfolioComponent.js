@@ -25,8 +25,8 @@ class PortfolioComponent extends React.Component{
 		.then((data) => {
 			return data.json().then(function(json) {
 				console.log('componentDidMount server response: ' + json.isAuthenticated)
-
-				self.setState({ loggedin: json.isAuthenticated });
+				console.log(json)
+				self.setState({ user: json.user, loggedin: json.isAuthenticated });
 				//return json.isAuthenticated;
 			});
 		});

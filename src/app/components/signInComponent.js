@@ -55,7 +55,7 @@ class SignInComponent extends React.Component{
 					console.log(resp.headers)
 					console.log('document.cookie')
 					console.log(document.cookie)
-					//history.push('/portfolio')
+					history.push('/portfolio')
 					//localStorage.token = result.token;
 					 //window.location = '/portfolio';
 					 //$self.props.history.push("/");

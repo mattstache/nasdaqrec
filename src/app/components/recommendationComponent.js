@@ -108,15 +108,19 @@ class RecommendationComponent extends React.Component{
 		console.log('get lists')
 		let symbols = [];
 
-		fetch(config.apiUrl + '/api/stock/all')
+		fetch('/api/stock/all', {
+			credentials: 'include',
+		})
 		.then((data) => {
 			return data.json().then(function(json) {
 				console.log('----GETSTOCKS----')
 				console.log(json)
 
-				for (var i = 0, len = json.length; i < len; i++) {
-				  symbols.push(json[i].symbol);
-				}
+				// for (var i = 0, len = json.length; i < len; i++) {
+				//   symbols.push(json[i].symbol);
+				// }
+
+				symbols = json;
 
 				console.log(symbols)
 
