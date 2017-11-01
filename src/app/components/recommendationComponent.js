@@ -47,14 +47,16 @@ class RecommendationComponent extends React.Component{
 
 		console.log('form')
 		console.log(config.apiUrl)
-		fetch(config.apiUrl + '/api/stock/add', {
+		fetch('/api/stock/add', {
 			method: 'POST',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
     		}),
+    		credentials: 'include',
 			body: JSON.stringify({symbol: symbol})
 		})
 		.then((data) => {
+			console.log(data)
 			return data.json().then(function(json) {
 				$self.GetStocks(function(symbols){
 					$self.setState({symbols: symbols});
@@ -72,12 +74,13 @@ class RecommendationComponent extends React.Component{
 		console.log('onDeleteStock')
 		//console.log(this.props)
 		console.log(stock)
-		fetch(config.apiUrl + '/api/stock/' + stock._id, {
+		fetch('/api/stock/' + stock._id, {
 			method: 'DELETE',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
     		}),
-			body: JSON.stringify({stockId: stock._id})
+    		credentials: 'include',
+			body: JSON.stringify({stock: stock})
 		})
 		.then((data) => {
 			console.log('client updated stock 1')

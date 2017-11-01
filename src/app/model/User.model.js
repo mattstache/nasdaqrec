@@ -18,24 +18,14 @@ userSchema.pre('save', function(callback){
 	callback();
 });
 
-// TODO method to check hashed pw
 userSchema.methods.checkPassword = function(pw, next){
-	console.log('check1: ' + pw)
-	console.log('check2: ' + this.hash)
 	bcrypt.compare(pw, this.hash, function(err, isMatch){
 		if(err){
-			console.log('error')
-			console.log(err)
 			return next(err);
-		}else{
-			console.log('no err')
 		}
-
-		console.log('ismathch: ' + isMatch)
 
 		next(null, isMatch);
 	});
-	//return (this.hash === pw);
 }
 
 // add stock for user

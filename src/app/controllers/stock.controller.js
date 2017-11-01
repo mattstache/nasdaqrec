@@ -4,75 +4,65 @@ var mongoose = require('mongoose')
 const jwt = require('jwt-simple');
 const config = require('../model/config');
   //models
-const Stock = require('../model/Stock.model');
+//const Stock = require('../model/Stock.model');
 const User = require('../model/User.model');
 
 exports.show_all_stocks = function(req, res) {
-	console.log('show_all_stocks');
-	
 	const { token } = req.cookies;
-	console.log(token)
 	var decoded = jwt.decode(token, config.secret);
-
-	console.log('getuserbyid: ' + decoded.id)
-
 
 	User.findOne({_id: decoded.id}).lean()
 	.exec()
 	.then((user) => {
-		console.log('loser user')
-		console.log(user)
 		res.send(JSON.stringify(user.stocks));
 	})
 	.catch((err) => {
-		console.log('an error has occurred')
 		res.send('error has occurred')
 	})
-
-	//untouched for showing all stocks in stock table vs user stocks
-	// Stock.find().lean()
-	// .exec()
-	// .then((stocks) => {
-	// 	res.send(JSON.stringify(stocks));
-	// })
-	// .catch((err) => {
-	// 	console.log('an error has occurred')
-	// 	res.send('error has occurred')
-	// })
 };
 
 exports.save_new_stock = function(req, res) {
-	console.log('save_new_stock');
-	var newStock = new Stock();
+	const { token } = req.cookies;
+	var decoded = jwt.decode(token, config.secret);
 
-	newStock.symbol = req.body.symbol.toUpperCase();
+	var stock = req.body.symbol.toUpperCase();
 
-	console.log(newStock);
+	User.findOne({_id: decoded.id}, (err, user) => {
+		if (err) return next(err);
+        if (!user) return res.status(400).send('No user with that email');
 
-	newStock.save()
-	.then((stock) => {
-		res.send(stock);
-	})
-	.catch((err) => {
-		res.send('error saving stock');
+        user.addStock(stock);
+
+	    user.save()
+		.then((user) => {
+			console.log('save new stock :')
+			console.log(user.stocks)
+			res.send(user.stocks);
+		})
+		.catch((err) => {
+			res.send('error saving stock');
+		});
 	});
-
 };
 
 
 exports.delete_stock_by_id = function(req, res) {
-	console.log('delete_stock_by_id');
-	Stock.findOneAndRemove({
-		_id: req.params.id
-	})
-	.exec()
-	.then((stock) => {
-		console.log(stock)
-		res.send(stock);
-		//res.status(204);
-	})
-	.catch((err) => {
-		res.send('error deleting list');
-	});
+	const { token } = req.cookies;
+	var decoded = jwt.decode(token, config.secret);
+	var stock = req.body.stock.toUpperCase();
 
+	User.findOne({_id: decoded.id}, (err, user) => {
+		if (err){console.log(err); return next(err);}
+        if (!user) return res.status(400).send('No user with that email');
+
+        user.deleteStock(stock);
+
+	    user.save()
+		.then((user) => {
+			res.send(user.stocks);
+		})
+		.catch((err) => {
+			res.send('error saving stock');
+		});
+	});
 };
