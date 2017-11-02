@@ -52,6 +52,16 @@ console.log(token)
 	//next();
 };
 
+exports.signOutUser = function(req, res, next){
+	console.log('signoutuser')
+	cookie = req.cookies;
+    // if (!cookie.hasOwnProperty('token')) {
+    //     continue;
+    // }
+    res.cookie('token', '', {expires: new Date(0)});
+    res.redirect('/portfolio');
+};
+
 exports.loginRequired = function(req, res, next){
 	validateToken(req, res, next, { adminRequired: false });
 };

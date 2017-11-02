@@ -2,6 +2,7 @@ var React = require('react');
 
 import RecommendationComponent from './recommendationComponent';
 import SignInComponent from './signInComponent';
+import Header from './headerComponent.js';
 
 //Create PortfolioComponent
 class PortfolioComponent extends React.Component{
@@ -39,6 +40,7 @@ class PortfolioComponent extends React.Component{
 		}
 		return(
 			<div>
+				<Header />
 				Portfolio
 
 				{component}

@@ -12,7 +12,7 @@ class HeaderComponent extends React.Component{
 	}
 
 	render(){
-		let signOutButton = <div><button onClick="">Sign out</button></div>;
+		let signOutButton = <div><button onClick={this.signOut}>Sign out</button></div>;
 
 		return(
 			<div>
@@ -30,6 +30,33 @@ class HeaderComponent extends React.Component{
 	signOut(e) {
 		e.preventDefault();
 		console.log('signOut');
+
+
+		fetch('/api/auth/signout', {//config.apiUrl + 
+			method: 'POST',
+			headers: new Headers({
+             	'Accept':  'application/json',
+       			'Content-Type': 'application/json',
+       			'Cache': 'no-cache'
+    		}),
+    		//credentials: 'same-origin',
+    		credentials: 'include'
+		})
+		.then((res) => {
+			if(!res.ok){ alert('An error occurred');}
+			else{
+				return res.json().then(function(resp){
+					history.push('/portfolio')
+				})
+			}
+		});
+
+
+
+
+
+
+
 
 		// fetch(config.apiUrl + '/api/user', {
 		// 	method: 'POST',
