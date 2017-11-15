@@ -51,36 +51,8 @@ class SignInComponent extends React.Component{
 			if(!res.ok){ alert('A sign in error occurred');}
 			else{
 				console.log('redirect to portfolio')
-				//this.context.router.push("/portfolio");
 				this.props.history.push("/portfolio");
-				//browserHistory.replace("/portfolio");
-				//return <Redirect to='/portfolio'  />;
-				// return res.json().then(function(resp){
-				// 	console.log('signin')
-				// 	console.log(resp)
-				// 	console.log(resp.headers)
-				// 	console.log('document.cookie')
-				// 	console.log(document.cookie)
-					
-				// 	//history.push('/portfolio')
-				// 	//localStorage.token = result.token;
-				// 	 //window.location = '/portfolio';
-				// 	 //$self.props.history.push("/");
-
-				// 	//browserHistory.replace("/")
-				// })
 			}
-
-
-			// return res.json().then(function(json) {
-			// 	console.log(json)
-			// 	// $self.GetStocks(function(symbols){
-			// 	// 	$self.setState({symbols: symbols});
-			// 	// })
-
-			// 	// $self.refs.symbol.value = "";
-			// 	//this.props.history.push({pathname: '/'})
-			// });
 		});
 	}
 

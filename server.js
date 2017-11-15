@@ -85,7 +85,7 @@ promise.then(function(db) {
 
 	//Use our router configuration when we call /api
 	app.use('/api/stock', stockRoutes);
-	app.use('/api/users', userRoutes);
+	app.use('/api/user', userRoutes);
 	app.use('/api/auth', authRoutes);
 	app.use('/api/admin', adminRoutes);
 
