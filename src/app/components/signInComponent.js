@@ -1,5 +1,6 @@
 var React = require('react');
 //import {browserHistory} from 'react-router';
+import  { Redirect } from 'react-router';
 require('es6-promise').polyfill();
 const config = require('../model/config');
 import RecommendationChart from './recommendationChartComponent.js';
@@ -47,21 +48,27 @@ class SignInComponent extends React.Component{
 			body: JSON.stringify({email: $self.refs.email.value, password: $self.refs.password.value})
 		})
 		.then((res) => {
-			if(!res.ok){ alert('An error occurred');}
+			if(!res.ok){ alert('A sign in error occurred');}
 			else{
-				return res.json().then(function(resp){
-					console.log('signin')
-					console.log(resp)
-					console.log(resp.headers)
-					console.log('document.cookie')
-					console.log(document.cookie)
-					history.push('/portfolio')
-					//localStorage.token = result.token;
-					 //window.location = '/portfolio';
-					 //$self.props.history.push("/");
+				console.log('redirect to portfolio')
+				//this.context.router.push("/portfolio");
+				this.props.history.push("/portfolio");
+				//browserHistory.replace("/portfolio");
+				//return <Redirect to='/portfolio'  />;
+				// return res.json().then(function(resp){
+				// 	console.log('signin')
+				// 	console.log(resp)
+				// 	console.log(resp.headers)
+				// 	console.log('document.cookie')
+				// 	console.log(document.cookie)
+					
+				// 	//history.push('/portfolio')
+				// 	//localStorage.token = result.token;
+				// 	 //window.location = '/portfolio';
+				// 	 //$self.props.history.push("/");
 
-					//browserHistory.replace("/")
-				})
+				// 	//browserHistory.replace("/")
+				// })
 			}
 
 

@@ -23,8 +23,8 @@ class RecommendationComponent extends React.Component{
 		let reccEl = this.state.symbols.map(function(symbol, index){
 			console.log('symbol: '  + symbol)
 			return(
-				<div>
-					<RecommendationChart key={index} stock={symbol} onDeleteStock={this.onDeleteStock} />
+				<div key={index}>
+					<RecommendationChart stock={symbol} onDeleteStock={this.onDeleteStock} />
 				</div>
 			)
 		}.bind(this));

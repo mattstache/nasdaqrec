@@ -1,4 +1,6 @@
 var React = require('react');
+//import  { Redirect } from 'react-router-dom'
+import  { Redirect } from 'react-router';
 require('es6-promise').polyfill();
 const config = require('../model/config');
 //require('isomorphic-fetch');
@@ -30,6 +32,7 @@ class HeaderComponent extends React.Component{
 	signOut(e) {
 		e.preventDefault();
 		console.log('signOut');
+		var $self = this;
 
 
 		fetch('/api/auth/signout', {//config.apiUrl + 
@@ -45,9 +48,12 @@ class HeaderComponent extends React.Component{
 		.then((res) => {
 			if(!res.ok){ alert('An error occurred');}
 			else{
-				return res.json().then(function(resp){
-					history.push('/portfolio')
-				})
+				$self.props.history.push("/portfolio");
+				//return <Redirect to='/signin'  />;
+				// return res.json().then(function(resp){
+				// 	//history.push('/portfolio')
+					
+				// })
 			}
 		});
 

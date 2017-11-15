@@ -59,7 +59,8 @@ exports.signOutUser = function(req, res, next){
     //     continue;
     // }
     res.cookie('token', '', {expires: new Date(0)});
-    res.redirect('/portfolio');
+    res.status(200).send();
+    //res.redirect('/portfolio');
 };
 
 exports.loginRequired = function(req, res, next){
