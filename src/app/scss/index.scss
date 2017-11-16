@@ -1,15 +1,7 @@
 @import "~normalize.css/normalize.css";
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
-
-/* apply a natural box layout model to all elements, but allowing components to change */
-html {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Raleway:400,700');
 
 
 // ----- VARIABLES -----
@@ -21,6 +13,9 @@ $body-background:#A8D0E6;
 $button-submit-color:#374785;
 $button-submit-color-active:#2e3c71;
 $button-submit-color-hover:#425290;
+
+$sans-serif:'Raleway', sans-serif;
+$serif:'Playfair Display', serif;
 
 
 // ----- MIXINS -----
@@ -37,10 +32,27 @@ $button-submit-color-hover:#425290;
 	border-top:4px solid #374785;
 }
 
+// ----- FIX NORMALIZE CSS FONT_FAMILY ON INPUTS -----
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body{
 	background:$body-background;
-	font-family:arial;
+	font-family:$sans-serif;
 	font-size:11px;
 	position: relative;
 }
@@ -144,7 +156,7 @@ body{
 
 	.page-form__header{
 		font-size:30px;
-		font-weight:bold;
+		font-weight:700;
 		padding-bottom:10px;
 		display:block;
 		color:#4e4e4e;
