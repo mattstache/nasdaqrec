@@ -1,5 +1,129 @@
+@import "~normalize.css/normalize.css";
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// ----- VARIABLES -----
+$input-border-color: #ddd;
+$input-text-color: #4e4e4e;
+
+$body-background:#A8D0E6;
+
+$button-submit-color:#374785;
+$button-submit-color-active:#2e3c71;
+$button-submit-color-hover:#425290;
+
 body{
-	background:pink;
+	background:$body-background;
 	font-family:arial;
-	font-size:20px;
+	font-size:11px;
+	position: relative;
+}
+
+// ----- MIXINS -----
+@mixin absolute-center{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
+
+// ----- INPUTS -----
+.text-input{
+	height:50px;
+	border:solid $input-border-color 1px;
+	border-color:$input-border-color;
+	color:$input-text-color;
+	padding:0 20px 0 20px;
+	font-size:14px;
+	outline:none;
+	border-radius:2px;
+
+	&:focus{
+		border-color:#374785;
+		transition:border-color .2s;
+	}
+
+	&:active, &:focus{
+		outline:none;
+	}
+}
+
+// ----- BUTTONS -----
+.button{
+	height:50px;
+	border-radius:3px;
+	padding-left:20px;
+	padding-right:20px;
+	border:none;
+	font-size:14px;
+	outline:none;
+
+	&:hover, &:active, &:focus{
+		outline:none;
+	}
+
+	&:not(:disabled){
+		&:hover{
+			cursor:pointer;
+		}
+	}
+
+	&.button--submit{
+		background:$button-submit-color;
+		color:#fff;
+
+		&:not(:disabled){
+			&:hover{
+				background:$button-submit-color-hover;
+			}
+
+			&:active{
+				background:$button-submit-color-active;
+			}
+		}
+	}
+}
+
+// Wrapper for centered fullpage elements
+.fullpage-wrapper{
+	position:relative;
+	height:100vh;
+}
+
+
+// Forms that exist in the center of the page
+.page-form{
+	background:#fff;
+	width:100%;
+	max-width:400px;
+	padding:10px;
+	@include absolute-center;
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+	border-radius:2px 2px 5px 5px;
+	border-top:4px solid #374785;
+
+	.text-input{
+		display:block;
+		width:100%;
+		margin-bottom:10px;
+	}
+
+	.button--submit{
+		width:100%;
+	}
+
+	.page-form__header{
+		font-size:30px;
+		font-weight:bold;
+		padding-bottom:10px;
+		display:block;
+		color:#4e4e4e;
+	}
 }

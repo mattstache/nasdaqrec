@@ -1,6 +1,7 @@
 var React = require('react');
 //import {browserHistory} from 'react-router';
 import  { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 require('es6-promise').polyfill();
 const config = require('../model/config');
 import RecommendationChart from './recommendationChartComponent.js';
@@ -15,10 +16,18 @@ class SignInComponent extends React.Component{
 	}
 
 	render(){
-		let signInForm = <div><form onSubmit={this.signIn}><input type="text" ref="email" placeholder="email" /><br/><input type="password" ref="password" placeholder="password" /><button>Log in</button></form></div>;
+		let signInForm = <div>
+			<form className="page-form" onSubmit={this.signIn}>
+				<span className="page-form__header">Log in</span>
+				or <Link to={'/signup'}>Sign up</Link>
+				<input type="text" ref="email" placeholder="Email" className="text-input" autoFocus="true" />
+				<input type="password" ref="password" placeholder="Password" className="text-input" />
+				<button className="button button--submit">Log in</button>
+			</form>
+			</div>;
 
 		return(
-			<div>
+			<div className="fullpage-wrapper">
 				{signInForm}
 			</div>
 		);
