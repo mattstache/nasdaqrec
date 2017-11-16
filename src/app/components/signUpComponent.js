@@ -1,4 +1,5 @@
 var React = require('react');
+import { Link } from 'react-router-dom';
 require('es6-promise').polyfill();
 const config = require('../model/config');
 //require('isomorphic-fetch');
@@ -17,10 +18,18 @@ class SignUpComponent extends React.Component{
 	}
 
 	render(){
-		let signUpForm = <div><form onSubmit={this.signUp}><input type="text" ref="email" placeholder="email" /><br/><input type="password" ref="password" placeholder="password" /><button>Sign up</button></form></div>;
+		let signUpForm = <div>
+		<form className="page-form" onSubmit={this.signUp}>
+			<span className="page-form__header">Sign up</span>
+			<span className="page-form__description">or <Link to={'/signin'} className="link">Sign in</Link> with an existing account</span>
+			<input type="text" ref="email" placeholder="Email" className="text-input" autoFocus="true" />
+			<input type="password" ref="password" placeholder="Password" className="text-input" />
+			<button className="button button--submit">Sign up</button>
+		</form>
+		</div>;
 
 		return(
-			<div>
+			<div className="fullpage-wrapper">
 				{signUpForm}
 			</div>
 		);

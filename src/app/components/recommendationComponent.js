@@ -29,10 +29,10 @@ class RecommendationComponent extends React.Component{
 			)
 		}.bind(this));
 
-		let addSymbolForm = <div><form onSubmit={this.addSymbol}><input type="text" ref="symbol" /><button>Add symbol</button></form></div>;
+		let addSymbolForm = <div><form onSubmit={this.addSymbol} className="new-symbol-form"><input type="text" ref="symbol" className="text-input" placeholder="Enter a symbol" /><button className="button button--submit">Add to list</button></form></div>;
 
 		return(
-			<div>
+			<div className="padded-page">
 				{addSymbolForm}
 				<div style={listStyle}>
 					{reccEl}

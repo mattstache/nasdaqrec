@@ -1,4 +1,6 @@
 @import "~normalize.css/normalize.css";
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
 
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
@@ -8,6 +10,7 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
 
 // ----- VARIABLES -----
 $input-border-color: #ddd;
@@ -19,12 +22,6 @@ $button-submit-color:#374785;
 $button-submit-color-active:#2e3c71;
 $button-submit-color-hover:#425290;
 
-body{
-	background:$body-background;
-	font-family:arial;
-	font-size:11px;
-	position: relative;
-}
 
 // ----- MIXINS -----
 @mixin absolute-center{
@@ -32,6 +29,20 @@ body{
 	top:50%;
 	left:50%;
 	transform:translate(-50%, -50%);
+}
+
+@mixin card-styles{
+	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+	border-radius:2px 2px 5px 5px;
+	border-top:4px solid #374785;
+}
+
+
+body{
+	background:$body-background;
+	font-family:arial;
+	font-size:11px;
+	position: relative;
 }
 
 // ----- INPUTS -----
@@ -52,6 +63,15 @@ body{
 
 	&:active, &:focus{
 		outline:none;
+	}
+}
+
+// ----- LINKS -----
+.link{
+	color:$button-submit-color;
+
+	&:hover{
+		color:$button-submit-color-hover;
 	}
 }
 
@@ -97,6 +117,10 @@ body{
 	height:100vh;
 }
 
+.padded-page{
+	padding:10px;
+}
+
 
 // Forms that exist in the center of the page
 .page-form{
@@ -105,9 +129,7 @@ body{
 	max-width:400px;
 	padding:10px;
 	@include absolute-center;
-	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
-	border-radius:2px 2px 5px 5px;
-	border-top:4px solid #374785;
+	@include card-styles;
 
 	.text-input{
 		display:block;
@@ -117,6 +139,7 @@ body{
 
 	.button--submit{
 		width:100%;
+		margin-top:40px;
 	}
 
 	.page-form__header{
@@ -125,5 +148,41 @@ body{
 		padding-bottom:10px;
 		display:block;
 		color:#4e4e4e;
+	}
+
+	.page-form__description{
+		padding-bottom:10px;
+		display:block;
+	}
+}
+
+
+//sgin out button on page
+.sign-out-element{
+	border:none;
+	background:none;
+	float:right;
+}
+
+
+// standard card look
+.card{
+	@include card-styles;
+	font-weight:bold;
+	text-align:center;
+	margin:10px;
+	background:#fff;
+	padding:5px;
+}
+
+.new-symbol-form{
+	@include card-styles;
+	background:#fff;
+	padding:5px;
+	display:inline-block;
+	margin-left:10px;
+
+	.text-input{
+		margin-right:10px;
 	}
 }

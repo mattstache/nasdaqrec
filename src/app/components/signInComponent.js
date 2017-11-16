@@ -19,7 +19,7 @@ class SignInComponent extends React.Component{
 		let signInForm = <div>
 			<form className="page-form" onSubmit={this.signIn}>
 				<span className="page-form__header">Log in</span>
-				or <Link to={'/signup'}>Sign up</Link>
+				<span className="page-form__description">or <Link to={'/signup'} className="link">Sign up</Link> for a new account</span>
 				<input type="text" ref="email" placeholder="Email" className="text-input" autoFocus="true" />
 				<input type="password" ref="password" placeholder="Password" className="text-input" />
 				<button className="button button--submit">Log in</button>

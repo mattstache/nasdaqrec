@@ -50,7 +50,7 @@ class PortfolioComponent extends React.Component{
 	render(){
 		const $self = this;
 		let component = <SignInComponent />;
-		let signOutButton = <div><button onClick={this.signOut}>Sign out</button></div>;
+		let signOutButton = <button onClick={this.signOut} className="sign-out-element">Sign out <i className="fa fa-sign-out"/></button>;
 		if(this.state && this.state.loggedin){
 			console.log('logged in')
 			component = <RecommendationComponent />;
