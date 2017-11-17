@@ -2,6 +2,8 @@ const User = require('../model/User.model');
 const jwt = require('jwt-simple');
 const config = require('../model/config');
 
+exports.isAuthenticated = function(){return false};
+
 exports.loginUser = function(req, res, next){
 	console.log('controller loginuser')
 	if(typeof req.body.email !== 'string'){
@@ -64,7 +66,14 @@ exports.signOutUser = function(req, res, next){
 };
 
 exports.loginRequired = function(req, res, next){
+	console.log('loginRequired()')
 	validateToken(req, res, next, { adminRequired: false });
+};
+
+var authenticated = false;
+
+exports.isAuthenticated = function(){
+	return authenticated;
 };
 
 function validateToken(req, res, next, c) {
@@ -113,7 +122,8 @@ function validateToken(req, res, next, c) {
 
         // res.isAuthenticated = true;
         // res.user = user;
-        console.log('user has been authenticated')
+        console.log('user has been authenticated');
+        authenticated = true;
         res.status(200).send({user: user, isAuthenticated:true});
         next();
     });
