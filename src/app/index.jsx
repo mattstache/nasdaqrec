@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 // const mongoose = require('mongoose');
 const config = require('./model/config');
-import {Router, Route, browserHistory, Link, Redirect} from 'react-router';
+import {Router, Route, browserHistory, Link, Redirect, Switch} from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory'
 const newHistory = createBrowserHistory();
 //var auth = require('./controllers/auth.controller.js');
@@ -16,6 +16,7 @@ import PortfolioComponent from './components/portfolioComponent';
 import RecommendationComponent from './components/recommendationComponent';
 import SignInComponent from './components/signInComponent';
 import SignUpComponent from './components/signUpComponent';
+import NotFoundPage from './components/NotFoundPage';
 
 import PrivateRoute from './privateRoute';
 
@@ -26,11 +27,14 @@ export default class App extends React.Component {
 		return(
 			<Router history={newHistory}>
 				<div>
-					<Route exact path={'/'} component={RecommendationComponent}></Route>
+				<Switch>
+					<PrivateRoute exact path={'/'} component={PortfolioComponent} />
 					<Route exact path={'/signin'} component={SignInComponent}></Route>
 					<Route exact path={'/signup'} component={SignUpComponent}></Route>
 					
 					<PrivateRoute path="/portfolio" component={PortfolioComponent}/>
+					<Route component={NotFoundPage} />
+					</Switch>
 				</div>
 			</Router>
 		);
