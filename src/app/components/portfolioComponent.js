@@ -16,48 +16,16 @@ class PortfolioComponent extends React.Component{
         this.signOut = this.signOut.bind(this);
     }
 
-    componentWillMount() {
-        const self = this;
-
-
-  //       console.log('isAuthenticated');
-		// console.log(document.cookie)
-		// fetch('/api/auth/validate', {//config.apiUrl + 
-		// 	method: 'GET',
-		// 	headers: new Headers({
-	 //         'Content-Type': 'application/json', // <-- Specifying the Content-Type
-		// 	}),
-		// 	credentials: 'include',
-		// })
-		// .then((data) => {
-		// 	return data.json().then(function(json) {
-		// 		console.log('componentDidMount server response: ' + json.isAuthenticated)
-		// 		console.log(json)
-		// 		if(json.isAuthenticated){
-		// 			console.log('isauth')
-		// 			self.setState({ user: json.user, loggedin: json.isAuthenticated });
-		// 		}else{
-		// 			console.log('isnotauth')
-		// 			self.context.router.history.push('/signin');
-		// 		}
-		// 	});
-		// });
-    }
-
 	render(){
 		const $self = this;
 		let component = <RecommendationComponent />;//<SignInComponent />;
 		let signOutButton = <button onClick={this.signOut} className="sign-out-element">Sign out <i className="fa fa-sign-out"/></button>;
-		// if(this.state && this.state.loggedin){
-		// 	console.log('logged in')
-		// 	component = <RecommendationComponent />;
-		// }
+
 		return(
 			<div>
 				{signOutButton}
 
 				{component}
-                
 			</div>
 		);
 	}
