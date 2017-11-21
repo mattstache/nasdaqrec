@@ -101,6 +101,10 @@ promise.then(function(db) {
 		res.status(err.status || 500).send();
 	})
 
+	app.on('listening',function(){
+    console.log('ok, server is running');
+});
+
 	//starts the server and listens for requests
 	app.listen(port, function() {
 	 console.log(`API running on port ${port}`);

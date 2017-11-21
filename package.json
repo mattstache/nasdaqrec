@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -d --config webpack.dev.js && webpack-dev-server --config webpack.dev.js --content-base src/ --inline --hot --port 3000 --history-api-fallback",
-    "prod": "webpack --config webpack.prod.js"
+    "prod": "nf start --procfile Procfile",
+    "dev": "nf start --procfile Procfile.dev",
+    "builddev": "webpack -d --config webpack.dev.js && webpack-dev-server --content-base src/ --inline --hot --port 3000 --history-api-fallback --config webpack.dev.js",
+    "buildprod": "webpack --config webpack.prod.js"
   },
   "author": "Matt Alarie",
   "license": "ISC",
