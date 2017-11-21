@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var users = require('../controllers/user.controller.js');
+var auth = require('../controllers/auth.controller.js');
 var express = require('express');
 
 var router = express.Router();
@@ -18,11 +19,11 @@ router.param('id', function(req, res, next, id){
 router.get('/', function(req, res){
 	res.send('API initialized')
 });
-router.get('/all', users.getAllUsers)
+router.get('/all', auth.loginRequiredBackend, users.getAllUsers)
 router.post('/', users.createUser);
-router.delete('/:id', users.deleteUserById);
-router.put('/:id', users.updateUser);
-router.get('/:id', users.getUserById)
+router.delete('/:id', auth.loginRequiredBackend, users.deleteUserById);
+router.put('/:id', auth.loginRequiredBackend, users.updateUser);
+router.get('/:id', auth.loginRequiredBackend, users.getUserById)
 
 
 
