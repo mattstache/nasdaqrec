@@ -48,7 +48,7 @@ class RecommendationComponent extends React.Component{
 		let symbol = this.refs.symbol.value;
 
 		console.log('form')
-		console.log(config.apiUrl)
+		//console.log(config.apiUrl)
 		fetch('/api/stock/add', {
 			method: 'POST',
 			headers: new Headers({

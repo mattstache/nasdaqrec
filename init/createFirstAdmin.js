@@ -9,7 +9,7 @@ console.log('mongoose.readyState: ' + mongoose.connection.readyState)
 //open mongoose connection if it doesnt already exist
 if (mongoose.connection.readyState === 0){
 	console.log('opening mongoose connection...');
-	mongoose.connect(config.dbUrl, {
+	mongoose.connect(process.env.DB_URL, {
   		useMongoClient: true,
 	});
 
@@ -17,7 +17,7 @@ if (mongoose.connection.readyState === 0){
 	disconnect = true;
 }
 
-User.find({email: config.adminEmail}, function(err, admin){
+User.find({email: process.env.ADMIN_EMAIL}, function(err, admin){ //config.adminEmail
 	if (err){
 		if(disconnect) mongoose.connection.close();
 		return console.log(err);
@@ -28,10 +28,10 @@ User.find({email: config.adminEmail}, function(err, admin){
 		return;
 	}
 
-	console.log('could not find user ' + config.adminEmail);
+	console.log('could not find user ' + process.env.ADMIN_EMAIL);
 	var newAdmin = new User({
-		email: config.adminEmail,
-		hash: config.adminPassword,
+		email: process.env.ADMIN_EMAIL,
+		hash: process.env.ADMIN_PASSWORD,
 		isAdmin: true
 	})
 
@@ -41,7 +41,7 @@ User.find({email: config.adminEmail}, function(err, admin){
 			return console.log(err);
 		}
 
-		console.log('created user ' + config.adminEmail);
+		console.log('created user ' + process.env.ADMIN_EMAIL);
 		if(disconnect) mongoose.connection.close();
 		return;
 	});

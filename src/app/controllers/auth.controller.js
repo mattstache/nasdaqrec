@@ -23,7 +23,7 @@ exports.loginUser = function(req, res, next){
 
             var payload = { id: user._id };
 
-            var token = jwt.encode(payload, config.secret);
+            var token = jwt.encode(payload, process.env.APP_SECRET);
             user.token = token;
             user.save((err) => {
                 if (err) return next(err);
@@ -51,7 +51,7 @@ exports.loginRequiredBackend = function(req, res, next){
     }
 
     try {
-        var decoded = jwt.decode(token, config.secret);
+        var decoded = jwt.decode(token, process.env.APP_SECRET);
     } catch(err) {
     	console.log('Failed to authenticate token')
         return res.status(403).send('Failed to authenticate token');
@@ -86,7 +86,7 @@ function validateToken(req, res, next, c) {
     }
 
     try {
-        var decoded = jwt.decode(token, config.secret);
+        var decoded = jwt.decode(token, process.env.APP_SECRET);
     } catch(err) {
         return res.status(403).send('Failed to authenticate token');
     }

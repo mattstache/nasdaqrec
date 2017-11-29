@@ -9,7 +9,7 @@ const User = require('../model/User.model');
 
 exports.show_all_stocks = function(req, res) {
 	const { token } = req.cookies;
-	var decoded = jwt.decode(token, config.secret);
+	var decoded = jwt.decode(token, process.env.APP_SECRET);
 
 	User.findOne({_id: decoded.id}).lean()
 	.exec()
@@ -23,7 +23,7 @@ exports.show_all_stocks = function(req, res) {
 
 exports.save_new_stock = function(req, res) {
 	const { token } = req.cookies;
-	var decoded = jwt.decode(token, config.secret);
+	var decoded = jwt.decode(token, process.env.APP_SECRET);
 
 	var stock = req.body.symbol.toUpperCase();
 
@@ -48,7 +48,7 @@ exports.save_new_stock = function(req, res) {
 
 exports.delete_stock_by_id = function(req, res) {
 	const { token } = req.cookies;
-	var decoded = jwt.decode(token, config.secret);
+	var decoded = jwt.decode(token, process.env.APP_SECRET);
 	var stock = req.body.stock.toUpperCase();
 
 	User.findOne({_id: decoded.id}, (err, user) => {

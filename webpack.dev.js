@@ -8,7 +8,7 @@ module.exports = merge(common, {
     devServer: {
 		proxy: {
       		'/api': {
-        		target: config.apiUrl,
+        		target: process.env.APP_URL,//config.apiUrl,
         		secure: false,
         	}
 		}

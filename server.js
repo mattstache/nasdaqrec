@@ -22,9 +22,9 @@ var router = express.Router();
 
 const config = require('./src/app/model/config');
 
-var port = config.port;//process.env.API_PORT || 3001;
+var port = process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
 
-const db = config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
+const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
 mongoose.Promise = global.Promise;
 
 // Using `mongoose.connect`...
