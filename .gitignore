@@ -61,4 +61,5 @@ typings/
 .sass-cache/
 *.css.map
 
-dist/app
+dist/app/fonts
+dist/app/bundle.js
