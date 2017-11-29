@@ -148,6 +148,7 @@ body{
 	max-width:400px;
 	padding:10px;
 	@include card-styles;
+	margin: 0 auto;
 
 	.text-input{
 		display:block;
