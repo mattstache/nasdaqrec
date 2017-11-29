@@ -8,7 +8,7 @@
     "prod": "nf start --procfile Procfile",
     "dev": "nf start --procfile Procfile.dev",
     "builddev": "webpack -d --config webpack.dev.js && webpack-dev-server --content-base src/ --inline --hot --port 3000 --history-api-fallback --config webpack.dev.js",
-    "buildprod": "webpack --config webpack.prod.js && node server"
+    "buildprod": "webpack --history-api-fallback --config webpack.prod.js && node server"
   },
   "author": "Matt Alarie",
   "license": "ISC",
