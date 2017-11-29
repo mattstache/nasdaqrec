@@ -83,9 +83,7 @@ promise.then(function(db) {
 
 	app.use(express.static(__dirname + "/dist"));
 
-	// app.get('/*', function (req, res) {
-	//    res.sendFile(path.join(__dirname + "/dist", 'index.html'));
-	//  });
+	
 
 
 
@@ -117,6 +115,10 @@ promise.then(function(db) {
 	app.use(function(err, req, res, next){
 		res.status(err.status || 500).send();
 	})
+
+	app.get('/*', function (req, res) {
+	   res.sendFile(path.join(__dirname + "/dist", 'index.html'));
+	 });
 
 	app.on('listening',function(){
     console.log('ok, server is running');
