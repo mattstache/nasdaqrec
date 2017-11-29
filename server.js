@@ -31,6 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 var port = process.env.PORT;//process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
+app.set('port', process.env.PORT || 8080);
 
 const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
 mongoose.Promise = global.Promise;
@@ -114,7 +115,7 @@ promise.then(function(db) {
 });
 
 	//starts the server and listens for requests
-	app.listen(port, function() {
+	app.listen(app.get('port'), function() {
 	 console.log(`API running on port ${port}`);
 	});
 
