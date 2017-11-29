@@ -57,6 +57,11 @@ body{
 	position: relative;
 }
 
+// ----- Postitioning -----
+.absolute-center{
+	@include absolute-center;
+}
+
 // ----- INPUTS -----
 .text-input{
 	height:50px;
@@ -81,6 +86,7 @@ body{
 // ----- LINKS -----
 .link{
 	color:$button-submit-color;
+	cursor:pointer;
 
 	&:hover{
 		color:$button-submit-color-hover;
@@ -129,8 +135,9 @@ body{
 	height:100vh;
 }
 
-.padded-page{
+.padded-page, .fullpage-wrapper--padded{
 	padding:10px;
+	width:100%;
 }
 
 
@@ -140,7 +147,6 @@ body{
 	width:100%;
 	max-width:400px;
 	padding:10px;
-	@include absolute-center;
 	@include card-styles;
 
 	.text-input{
@@ -177,14 +183,31 @@ body{
 }
 
 
+//list of stock cards on page
+.portfolio-list{
+	display:flex;
+	flex-wrap:wrap;
+}
+
+
 // standard card look
 .card{
 	@include card-styles;
 	font-weight:bold;
 	text-align:center;
-	margin:10px;
+	margin:10px auto 0 auto;
 	background:#fff;
 	padding:5px;
+	max-width:100%;
+	overflow:hidden;
+
+	@media (min-width:781px){
+		margin:10px;
+	}
+
+	.card__imported-img{
+		max-width: 100%;
+	}
 }
 
 .new-symbol-form{
@@ -192,7 +215,7 @@ body{
 	background:#fff;
 	padding:5px;
 	display:inline-block;
-	margin-left:10px;
+	//margin-left:10px;
 
 	.text-input{
 		margin-right:10px;

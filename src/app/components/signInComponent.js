@@ -16,7 +16,7 @@ class SignInComponent extends React.Component{
 	}
 
 	render(){
-		let signInForm = <div>
+		let signInForm = <div className="absolute-center padded-page">
 			<form className="page-form" onSubmit={this.signIn}>
 				<span className="page-form__header">Log in</span>
 				<span className="page-form__description">or <Link to={'/signup'} className="link">Sign up</Link> for a new account</span>

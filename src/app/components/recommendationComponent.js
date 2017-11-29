@@ -15,17 +15,10 @@ class RecommendationComponent extends React.Component{
 	}
 
 	render(){
-		var listStyle = {
-			display: 'flex',
-			flexWrap: 'wrap'
-		}
-
 		let reccEl = this.state.symbols.map(function(symbol, index){
 			console.log('symbol: '  + symbol)
 			return(
-				<div key={index}>
-					<RecommendationChart stock={symbol} onDeleteStock={this.onDeleteStock} />
-				</div>
+				<RecommendationChart key={index} stock={symbol} onDeleteStock={this.onDeleteStock} />
 			)
 		}.bind(this));
 
@@ -34,7 +27,7 @@ class RecommendationComponent extends React.Component{
 		return(
 			<div className="padded-page">
 				{addSymbolForm}
-				<div style={listStyle}>
+				<div className="portfolio-list">
 					{reccEl}
 				</div>
 			</div>

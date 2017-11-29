@@ -18,7 +18,7 @@ class SignUpComponent extends React.Component{
 	}
 
 	render(){
-		let signUpForm = <div>
+		let signUpForm = <div className="absolute-center padded-page">
 		<form className="page-form" onSubmit={this.signUp}>
 			<span className="page-form__header">Sign up</span>
 			<span className="page-form__description">or <Link to={'/signin'} className="link">Sign in</Link> with an existing account</span>
