@@ -41,17 +41,6 @@ module.exports = {
 						}
 					}]
 			},
-			{
-                test: /\.(html)$/,
-                use: [{
-		    		loader: 'file-loader',
-		    		options: {
-	    				name: '[name].[ext]',
-						outputPath: '/',    // where the html will go
-						publicPath: '../'       // override the default path
-					}
-				}]
-            },
         ]
     },
 };
