@@ -8,6 +8,8 @@ var express = require('express');
 var router = express.Router();
 //const Stock = require('../model/User.model')
 
+console.log('Load user routes')
+
 router.param('id', function(req, res, next, id){
 	if(!req.params.id.match(/^[0-9a-fA-F]{24}$/)){
 		return res.status(400).send('Invalid id');

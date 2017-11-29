@@ -9,7 +9,7 @@ var router = express.Router();
 //const Stock = require('../model/Stock.model')
 
 router.get('/', function(req, res){
-	res.send('API initialized')
+	res.status(200).send('API initialized - test')
 });
 
 console.log('load stock routes')
