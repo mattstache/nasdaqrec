@@ -22,6 +22,14 @@ var router = express.Router();
 
 const config = require('./src/app/model/config');
 
+require('dotenv').load();
+
+console.log('-------=========process.env.NODE_ENV: ' + process.env.NODE_ENV)
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
+
 var port = process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
 
 const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
