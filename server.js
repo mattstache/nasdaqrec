@@ -26,12 +26,16 @@ require('dotenv').load();
 
 console.log('-------=========process.env.NODE_ENV: ' + process.env.NODE_ENV)
 
+var port = 3001;
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
+}else{
+	//app.set('port', process.env.PORT || 3001);
+	port = process.env.PORT;
 }
 
-var port = process.env.PORT;//process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
-app.set('port', process.env.PORT || 8080);
+//var port = 3001;//process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
+app.set('port', port);
 
 const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
 mongoose.Promise = global.Promise;
@@ -116,7 +120,7 @@ promise.then(function(db) {
 
 	//starts the server and listens for requests
 	app.listen(app.get('port'), function() {
-	 console.log(`API running on port ${port}`);
+	 console.log(`API running on port ${port} `);
 	});
 
 });
