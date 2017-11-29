@@ -26,6 +26,10 @@ module.exports = {
                     presets: ['react', 'es2015', 'stage-2']
                 }
             },
+            {
+		        test: /\.scss$/,
+		        loaders: ["style-loader", "css-loader", "postcss-loader","sass-loader"]
+		    },
 		    {
 		    	test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
 		    	use: [{
