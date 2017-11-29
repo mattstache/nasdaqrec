@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
 
-var port = process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
+var port = process.env.PORT;//process.env.APP_PORT;//config.port;//process.env.API_PORT || 3001;
 
 const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
 mongoose.Promise = global.Promise;
