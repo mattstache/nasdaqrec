@@ -116,7 +116,7 @@ promise.then(function(db) {
 		res.status(err.status || 500).send();
 	})
 
-	app.get('/*', function (req, res) {
+	app.get('*', function (req, res) {
 	   res.sendFile(path.join(__dirname + "/dist", 'index.html'));
 	 });
 
