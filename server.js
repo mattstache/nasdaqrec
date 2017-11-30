@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
+const path = require('path');
 //const httpProxy = require('http-proxy');
 //var jsonwebtoken = require("jsonwebtoken");
 
