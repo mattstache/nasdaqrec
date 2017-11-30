@@ -117,7 +117,7 @@ promise.then(function(db) {
 	})
 
 	app.get('*', function (req, res) {
-	   res.sendFile(path.join(__dirname + "/dist", 'index.html'));
+	   res.sendFile(path.resolve(__dirname + "/dist/index.html"));
 	 });
 
 	app.on('listening',function(){
