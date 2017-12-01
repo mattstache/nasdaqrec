@@ -24,9 +24,19 @@ class RecommendationChartComponent extends React.Component{
 			var savedDateTime = new Date(article.datetime);
 			var today = new Date();
 			var millisecondsDiff = today - savedDateTime;
-			var hoursOld = parseInt(millisecondsDiff / 1000 / 60 / 60);
+			var minutesOld = parseInt(millisecondsDiff / 1000 / 60);
+			var hoursOld = Math.round(minutesOld / 60);
 			var daysOld = Math.round(hoursOld / 24);
-			var age = hoursOld > 24 ? daysOld + ' day' + (daysOld > 1 ? "s" : "") : hoursOld + ' hour' + (hoursOld > 1 ? "s" : "");
+			var age = "";
+
+			if(minutesOld < 60){
+				age = minutesOld + ' minute' + (minutesOld > 1 ? "s" : "");
+			}else if(hoursOld < 24){
+				age = hoursOld + ' hour' + (hoursOld > 1 ? "s" : "");
+			}else{
+				age = daysOld + ' day' + (daysOld > 1 ? "s" : "");
+			}
+			//var age = hoursOld > 24 ? daysOld + ' day' + (daysOld > 1 ? "s" : "") : hoursOld + ' hour' + (hoursOld > 1 ? "s" : "");
 
 			return(
 				<div key={index} className="card__news__article">
