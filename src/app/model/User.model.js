@@ -4,7 +4,10 @@ const bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
 	email: {type: String, required: true, unique: true},
-	stocks: [String],
+	stocks: [{
+			symbol: String,
+			latestPrice: String
+		}],
 	isAdmin: Boolean,
 	hash: String,
 	token: String
@@ -29,9 +32,9 @@ userSchema.methods.checkPassword = function(pw, next){
 }
 
 // add stock for user
-userSchema.methods.addStock = function(symbol){
-	if(this.stocks.indexOf(symbol) == -1){
-		this.stocks.push(symbol);
+userSchema.methods.addStock = function(stock){
+	if(this.stocks.indexOf(stock) == -1){
+		this.stocks.push(stock);
 	}
 
 	return this.stocks;
@@ -39,10 +42,11 @@ userSchema.methods.addStock = function(symbol){
 
 // delete stock from user
 userSchema.methods.deleteStock = function(symbol){
-	var index = this.stocks.indexOf(symbol);
-
-	if(index !== -1){
-		this.stocks.splice(index, 1);
+	for(var i = 0; i < this.stocks.length; i++) {
+	    if(this.stocks[i].symbol == symbol) {
+	        this.stocks.splice(i, 1);
+	        break;
+	    }
 	}
 
 	return this.stocks;

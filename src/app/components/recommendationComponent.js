@@ -40,9 +40,7 @@ class RecommendationComponent extends React.Component{
 		let $self = this;
 		let symbol = this.refs.symbol.value;
 
-		console.log('form')
-		//console.log(config.apiUrl)
-		fetch('/api/stock/add', {
+        fetch('/api/stock/add', {
 			method: 'POST',
 			headers: new Headers({
              'Content-Type': 'application/json', // <-- Specifying the Content-Type
@@ -60,15 +58,12 @@ class RecommendationComponent extends React.Component{
 				$self.refs.symbol.value = "";
 			});
 		});
+
 	}
 
 	onDeleteStock(stock){
 		let $self = this;
-		//let stock = this.props.stock;
 
-		console.log('onDeleteStock')
-		//console.log(this.props)
-		console.log(stock)
 		fetch('/api/stock/' + stock._id, {
 			method: 'DELETE',
 			headers: new Headers({
@@ -95,7 +90,6 @@ class RecommendationComponent extends React.Component{
 
 	//load data
 	componentDidMount() {
-		console.log('componentDidMount')
 		var $self = this;
 		this.GetStocks(function(symbols){
 			$self.setState({symbols: symbols});
@@ -103,7 +97,6 @@ class RecommendationComponent extends React.Component{
 	}
 
 	GetStocks(callback) {
-		console.log('get lists')
 		let symbols = [];
 
 		fetch('/api/stock/all', {
@@ -111,16 +104,7 @@ class RecommendationComponent extends React.Component{
 		})
 		.then((data) => {
 			return data.json().then(function(json) {
-				console.log('----GETSTOCKS----')
-				console.log(json)
-
-				// for (var i = 0, len = json.length; i < len; i++) {
-				//   symbols.push(json[i].symbol);
-				// }
-
 				symbols = json;
-
-				console.log(symbols)
 
 				callback(json);
 			});

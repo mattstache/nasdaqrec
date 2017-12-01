@@ -25,9 +25,10 @@ class RecommendationChartComponent extends React.Component{
 
 		return(
 			<div key={this.props.stock._id} className="card">
-				<div><a target='_blank' href={'http://www.nasdaq.com/symbol/' + this.props.stock + '/recommendations'}>{this.props.stock}</a> <button onClick={this.delete}>remove</button></div>
-				<div><img className="card__imported-img" src={'http://www.nasdaq.com/charts/' + this.props.stock + '_rm.jpeg?time=' + milliseconds} /><br/>					
-				<img className="card__imported-img" src={'http://www.nasdaq.com/charts/' + this.props.stock + '_cnb.jpeg?time=' + milliseconds} />
+				<div><a target='_blank' href={'http://www.nasdaq.com/symbol/' + this.props.stock.symbol + '/recommendations'}>{this.props.stock.symbol}</a> <button onClick={this.delete}>remove</button></div>
+				<div>last price: {this.props.stock.latestPrice}</div>
+				<div><img className="card__imported-img" src={'http://www.nasdaq.com/charts/' + this.props.stock.symbol + '_rm.jpeg?time=' + milliseconds} /><br/>					
+				<img className="card__imported-img" src={'http://www.nasdaq.com/charts/' + this.props.stock.symbol + '_cnb.jpeg?time=' + milliseconds} />
 
 				</div>
 			</div>

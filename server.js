@@ -39,6 +39,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.set('port', port);
 
 const db = process.env.DB_URL;//config.dbUrl;//'mongodb://localhost:5000/nasdaqrec'
+console.log('=====db url: ' + db)
 mongoose.Promise = global.Promise;
 
 // Using `mongoose.connect`...
