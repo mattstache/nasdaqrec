@@ -203,9 +203,11 @@ body{
 	text-align:center;
 	margin:10px auto 0 auto;
 	background:#fff;
-	padding:5px;
+	padding:5px 0 0 0;
 	max-width:100%;
 	overflow:hidden;
+	display:flex;
+	flex-direction:column;
 
 	@media (min-width:781px){
 		margin:10px;
@@ -222,6 +224,10 @@ body{
 
 	.card__news{
 		text-align: left;
+		background:lighten($body-background, 15%);
+		border-top:$body-background solid 1px;
+		padding:5px;
+		flex-grow:1;
 
 		.card__news__headline{
 			font-weight:400;
@@ -239,10 +245,18 @@ body{
 		}
 
 		.card__news__article{
-			margin-bottom:5px;
+			padding-top:5px;
+			padding-bottom:5px;
+			border-top:solid 1px #fff;
+			border-bottom:solid 1px $body-background;
+
+			&:first-child{
+				border-top:none;
+			}
 
 			&:last-child{
 				margin-bottom: 0;
+				border-bottom:none;
 			}
 		}
 	}

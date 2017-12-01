@@ -61,7 +61,9 @@ class RecommendationChartComponent extends React.Component{
 				</div>
 				<div className="card__news">
 					<div className="card__section-headline">News</div>
-					{newsElement}
+					<div>
+						{newsElement}
+					</div>
 				</div>
 			</div>
 		);
