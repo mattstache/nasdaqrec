@@ -55,6 +55,7 @@ body{
 	font-family:$sans-serif;
 	font-size:11px;
 	position: relative;
+	color:#1e333e;
 }
 
 // ----- Postitioning -----
@@ -84,13 +85,17 @@ body{
 }
 
 // ----- LINKS -----
-.link{
+@mixin link{
 	color:$button-submit-color;
 	cursor:pointer;
 
 	&:hover{
 		color:$button-submit-color-hover;
 	}
+}
+
+.link{
+	@include link;
 }
 
 // ----- BUTTONS -----
@@ -204,10 +209,42 @@ body{
 
 	@media (min-width:781px){
 		margin:10px;
+		max-width:360px;
 	}
 
 	.card__imported-img{
 		max-width: 100%;
+	}
+
+	.card__section-headline{
+		font-size:18px;
+	}
+
+	.card__news{
+		text-align: left;
+
+		.card__news__headline{
+			font-weight:400;
+			font-size:12px;
+			text-decoration: none;
+			@include link;
+
+			&:hover{
+				background:$body-background;
+			}
+		}
+
+		.card__news__date{
+			font-weight:400;
+		}
+
+		.card__news__article{
+			margin-bottom:5px;
+
+			&:last-child{
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 

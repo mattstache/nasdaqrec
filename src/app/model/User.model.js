@@ -6,7 +6,14 @@ var userSchema = new Schema({
 	email: {type: String, required: true, unique: true},
 	stocks: [{
 			symbol: String,
-			latestPrice: String
+			latestPrice: String,
+			news: [{
+				datetime: Date,
+				headline: String,
+				source: String,
+				summary: String,
+				url: String
+			}]
 		}],
 	isAdmin: Boolean,
 	hash: String,

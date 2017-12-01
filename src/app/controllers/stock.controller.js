@@ -28,6 +28,7 @@ exports.show_all_stocks = function(req, res) {
 	            user.stocks.forEach(function(stock){
 	            	var symbol = stock.symbol;
 	            	stock.latestPrice = data[symbol].quote.latestPrice;
+	            	stock.news = data[symbol].news;
 	            });
 
 	            user.save()
