@@ -1,7 +1,7 @@
 @import "~normalize.css/normalize.css";
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Raleway:400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700|Vollkorn:400,700');
 
 
 // ----- VARIABLES -----
@@ -14,8 +14,9 @@ $button-submit-color:#374785;
 $button-submit-color-active:#2e3c71;
 $button-submit-color-hover:#425290;
 
-$sans-serif:'Raleway', sans-serif;
-$serif:'Playfair Display', serif;
+$sans-serif:'Lato', sans-serif;
+$serif:'Vollkorn', sans-serif;
+
 
 
 // ----- MIXINS -----
@@ -90,7 +91,7 @@ body{
 	cursor:pointer;
 
 	&:hover{
-		color:$button-submit-color-hover;
+		color:lighten($button-submit-color, 25%);
 	}
 }
 
@@ -177,6 +178,7 @@ body{
 	.page-form__description{
 		padding-bottom:10px;
 		display:block;
+		font-size: 14px;
 	}
 }
 
@@ -186,6 +188,9 @@ body{
 	border:none;
 	background:none;
 	float:right;
+	font-size:20px;
+	margin:10px 10px 0 0;
+	@include link;
 }
 
 
@@ -208,10 +213,40 @@ body{
 	overflow:hidden;
 	display:flex;
 	flex-direction:column;
+	position:relative;
 
 	@media (min-width:781px){
 		margin:10px;
 		max-width:360px;
+	}
+
+	.card__remove-button{
+		border:0;
+		padding:0;
+		background:0;
+		@include link;
+		font-size:30px;
+		position: absolute;
+		top:3px;
+		right:5px;
+	}
+
+	.card__symbol{
+		@include link;
+		font-size:30px;
+		font-weight: 400;
+		text-decoration: none;
+
+		.card__symbol__icon{
+			color:lighten($button-submit-color, 20%);
+			font-size: .6em;
+			line-height: 1em;
+		}
+	}
+
+	.card__current-price{
+		font-weight: 300;
+		font-size:40px;
 	}
 
 	.card__imported-img{
@@ -237,11 +272,12 @@ body{
 
 			&:hover{
 				background:$body-background;
+				color:$button-submit-color;
 			}
 		}
 
 		.card__news__date{
-			font-weight:400;
+			font-weight:300;
 		}
 
 		.card__news__article{
